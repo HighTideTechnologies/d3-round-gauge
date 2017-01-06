@@ -1,0 +1,11 @@
+body {
+  background-color: #133440
+}
+
+.wrapper {
+  background-color: #2d4e5a;
+  height: 140px;
+  width: 140px;
+  position: relative;
+  text-align: center;
+}

@@ -1,0 +1,82 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>D3 Round Gauge</title>
+  <link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+  <div id="wrapper" class="wrapper">
+  </div>
+  <button onclick="alarm()">Alarm</button>
+  <button onclick="clearAlarm()">Clear</button>
+  <button onclick="getRandom()">Update</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+  <script src="js/d3-round-gauge.js"></script>
+  <script>
+  $(".wrapper").resizable({
+    stop: function(event, ui) {
+      g.redraw();
+    }
+  });
+
+  let thresholds = [{
+    name: 'Alarm High',
+    value: 90,
+    type: 'High',
+    alarm: true
+  }, {
+    name: 'Pump On',
+    value: 55,
+    type: 'High',
+    alarm: false
+  }, {
+    name: 'Pump On',
+    value: 40,
+    type: 'Low',
+    alarm: false
+  }, {
+    name: 'Alarm Low',
+    value: 10,
+    type: 'Low',
+    alarm: true
+  }];
+
+  var opt = {
+    precision: 2,
+    gaugeRadius: 100,
+    minVal: 0,
+    maxVal: 100,
+    needleVal: 50,
+    divID: 'wrapper',
+    gaugeUnits: 'ft',
+    thresholds: thresholds
+  };
+
+  let g = new RoundGauge(opt)
+
+  function alarm() {
+    g.update({
+      color: "#d32f2f"
+    });
+  }
+
+  function clearAlarm() {
+    g.update({
+      color: "#3fabd4"
+    });
+  }
+
+  function getRandom() {
+    g.update({
+      value: Math.floor(Math.random() * 100)
+    });
+  }
+  </script>
+</body>
+
+</html>
